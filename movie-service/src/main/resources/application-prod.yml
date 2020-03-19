@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    name: db
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://mysql57.rdsmk37ojtw6swl.rds.gz.baidubce.com:3306/spider?useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: rdsroot
+    password: xsw2CDE#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      min-idle: 5
+      max-active: 100
+      initial-size: 10
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 50
+      remove-abandoned: true
+      filters: stat # ,wall,log4j # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      use-global-data-source-stat: true # 合并多个DruidDataSource的监控数据
+      stat-view-servlet:
+        login-username: JasonWong
+        login-password: xsw2CDE#

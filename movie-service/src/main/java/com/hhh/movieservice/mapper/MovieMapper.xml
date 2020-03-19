@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhh.movieservice.mapper.MovieMapper" >
+  <select id="getBDMovies" resultType="BDMovie" >
+    SELECT id, title, cover, douban_score
+    FROM bd_movie
+    WHERE cover != ""
+    ORDER BY update_time DESC
+  </select>
+  <select id="getOneById" parameterType="integer" resultType="BDMovie" >
+    SELECT *
+    FROM bd_movie
+    WHERE id = #{id}
+  </select>
+  <select id="getByTitle" parameterType="string" resultType="BDMovie" >
+    SELECT id, title, cover, douban_score
+    FROM bd_movie
+    WHERE title LIKE CONCAT('%', #{title}, '%')
+  </select>
+</mapper>

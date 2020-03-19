@@ -1,0 +1,19 @@
+server:
+  port: 9088
+
+
+mybatis:
+  type-aliases-package: com.hhh.movieservice.entity # 实体类别名
+  mapper-locations: classpath:/com/hhh/movieservice/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true # 数据库字段下划线自动转驼峰
+#  config-location: classpath:/mybatis-config.xml
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+spring:
+  profiles:
+    active: prod
+
+logging:
+  config: classpath:logback-@profileActive@.xml
