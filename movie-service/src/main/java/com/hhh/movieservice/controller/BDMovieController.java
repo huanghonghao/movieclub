@@ -20,8 +20,8 @@ public class BDMovieController {
     private MovieService movieService;
 
     @GetMapping("/list")
-    public R<List<HomePageVo>> getMovieByType(@RequestParam(defaultValue = "0")int offset, @RequestParam(defaultValue = "20")int limit) {
-        return R.data(movieService.getBDMovies(offset, limit));
+    public R<List<HomePageVo>> getMovieByType(@RequestParam(defaultValue = "0")int offset, @RequestParam(defaultValue = "21")int limit, @RequestParam int kind) {
+        return R.data(movieService.getBDMovies(offset, limit, kind));
     }
 
     @GetMapping("/detail")

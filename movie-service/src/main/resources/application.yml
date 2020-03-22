@@ -1,5 +1,10 @@
 server:
   port: 9088
+  ssl:
+    key-store: www.jasonwongmovie.club.jks
+    key-store-password: 16q1d2zjx4m7
+    key-store-type: JKS
+#    key-alias: tomcat
 
 
 mybatis:
@@ -13,7 +18,7 @@ pagehelper:
   reasonable: true
 spring:
   profiles:
-    active: prod
+    active: dev
 
 logging:
   config: classpath:logback-@profileActive@.xml

@@ -20,9 +20,11 @@ public class BDMovie {
 
     private String doubanScore;
 
+    private String updateSituation;
+
     /*上映时间*/
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date chinaReleaseTime;
+    private Date releaseTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date updateTime;
@@ -38,5 +40,11 @@ public class BDMovie {
     private String type;
 
     private String director;
+
+    private String actor;
+
+    private int kind;
+
+    private Long movieId;
 
 }

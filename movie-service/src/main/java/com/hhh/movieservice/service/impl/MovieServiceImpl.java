@@ -19,9 +19,9 @@ public class MovieServiceImpl implements MovieService {
     private MovieMapper movieMapper;
 
     @Override
-    public List<HomePageVo> getBDMovies(int offset, int limit) {
+    public List<HomePageVo> getBDMovies(int offset, int limit, int kind) {
         PageHelper.offsetPage(offset, limit, false);
-        return BeanCopyUtils.copyListProperties(movieMapper.getBDMovies(), HomePageVo::new);
+        return BeanCopyUtils.copyListProperties(movieMapper.getBDMovies(kind), HomePageVo::new);
     }
 
     @Override

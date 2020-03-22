@@ -49,7 +49,7 @@ public class BDMovie implements AfterExtractor {
 
     @Formatter("yyyy-MM-dd")
     @ExtractBy("//*[@id=\"dfg-video-details\"]/div/dl/dd/allText()/regex('\\d+-\\d+-\\d+')")
-    private Date chinaReleaseTime;
+    private Date releaseTime;
 
     @Formatter("yyyy-MM-dd HH:mm")
     @ExtractBy("//div[@class='dfg-video-title']/allText()/regex('\\d+-\\d+-\\d+\\s+\\d+:\\d+')")
@@ -70,6 +70,10 @@ public class BDMovie implements AfterExtractor {
     private String type;
 
     private String url;
+
+    private int kind;
+
+//    private String doubanUrl;
 
     @Override
     public void afterProcess(Page page) {
@@ -95,6 +99,12 @@ public class BDMovie implements AfterExtractor {
 
             // 当前页面的url
             this.setUrl(page.getUrl().get());
+
+            if(page.getUrl().get().startsWith("https://www.bd-film.cc/dh")) {
+                this.setKind(20); // 动漫
+            } else {
+                this.setKind(0);  // 电影
+            }
         } catch (Exception e) {
             log.error(this.toString(), e);
         }

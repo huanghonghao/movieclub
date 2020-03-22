@@ -12,4 +12,8 @@ public class HomePageVo {
     private String cover;
 
     private String doubanScore;
+
+    private String updateSituation;
+
+    private int kind;
 }

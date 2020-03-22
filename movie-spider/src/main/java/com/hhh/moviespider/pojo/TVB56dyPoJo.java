@@ -3,14 +3,12 @@ package com.hhh.moviespider.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "bd_movie")
-public class BDMoviePoJo {
+@Table(name = "tvb_56dy")
+public class TVB56dyPoJo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +22,12 @@ public class BDMoviePoJo {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "downloadLinks")
-    private String downloadLinks;
-
     /*简介*/
     @Column(name = "introduction")
     private String introduction;
 
     @Column(name = "doubanScore")
     private String doubanScore;
-
-    @Column(name = "updateSituation")
-    private String updateSituation;
 
     /*上映时间*/
 //    @Temporal(TemporalType.TIMESTAMP)
@@ -48,9 +40,6 @@ public class BDMoviePoJo {
 
     @Column(name = "cover")
     private String cover;
-
-    @Column(name = "language")
-    private String language;
 
     @Column(name = "country")
     private String country;
@@ -67,7 +56,13 @@ public class BDMoviePoJo {
     @Column(name = "kind")
     private Integer kind;
 
-    @Column(name = "actor", length = 1024)
+    /**
+     * 更新情况
+     */
+    @Column(name = "updateSituation")
+    private String updateSituation;
+
+    @Column(name = "actor")
     private String actor;
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MovieService {
 
-    List<HomePageVo> getBDMovies(int offset, int limit);
+    List<HomePageVo> getBDMovies(int offset, int limit, int type);
 
     BDMovie getBDMovieById(int id);
 

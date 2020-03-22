@@ -7,9 +7,11 @@ import java.util.List;
 
 public interface MovieMapper {
 
-    List<BDMovie> getBDMovies();
+    List<BDMovie> getBDMovies(int kind);
 
     BDMovie getOneById(int id);
 
     List<BDMovie> getByTitle(String title);
+
+    List<BDMovie> getTVBMovies();
 }

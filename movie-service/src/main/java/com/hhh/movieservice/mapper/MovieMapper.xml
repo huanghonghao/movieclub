@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hhh.movieservice.mapper.MovieMapper" >
   <select id="getBDMovies" resultType="BDMovie" >
-    SELECT id, title, cover, douban_score
+    SELECT id, title, cover, douban_score, kind, update_situation
     FROM bd_movie
-    WHERE cover != ""
+    WHERE cover != "" and kind = #{kind}
     ORDER BY update_time DESC
   </select>
   <select id="getOneById" parameterType="integer" resultType="BDMovie" >
@@ -16,5 +16,11 @@
     SELECT id, title, cover, douban_score
     FROM bd_movie
     WHERE title LIKE CONCAT('%', #{title}, '%')
+  </select>
+  <select id="getTVBMovies" parameterType="string" resultType="BDMovie" >
+    SELECT id, title, cover, update_situation, kind
+    FROM tvb_56dy
+    WHERE cover != ""
+    ORDER BY update_time DESC
   </select>
 </mapper>
