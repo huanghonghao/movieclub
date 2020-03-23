@@ -3,6 +3,7 @@ package com.hhh.movieservice.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.hhh.movieservice.entity.BDMovie;
+import com.hhh.movieservice.entity.TVB56dyEpisodes;
 import com.hhh.movieservice.mapper.MovieMapper;
 import com.hhh.movieservice.service.MovieService;
 import com.hhh.movieservice.utils.BeanCopyUtils;
@@ -32,5 +33,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<HomePageVo> searchMovie(String title) {
         return BeanCopyUtils.copyListProperties(movieMapper.getByTitle(title), HomePageVo::new);
+    }
+
+    @Override
+    public List<TVB56dyEpisodes> getEpisodes(int movieId) {
+        return movieMapper.getEpisodes(movieId);
     }
 }

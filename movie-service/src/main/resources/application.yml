@@ -18,7 +18,7 @@ pagehelper:
   reasonable: true
 spring:
   profiles:
-    active: dev
+    active: @profileActive@
 
 logging:
   config: classpath:logback-@profileActive@.xml

@@ -1,6 +1,7 @@
 package com.hhh.movieservice.controller;
 
 import com.hhh.movieservice.entity.BDMovie;
+import com.hhh.movieservice.entity.TVB56dyEpisodes;
 import com.hhh.movieservice.service.MovieService;
 import com.hhh.movieservice.vo.HomePageVo;
 import com.hhh.movieservice.vo.R;
@@ -32,6 +33,11 @@ public class BDMovieController {
     @GetMapping("/search")
     public R<List<HomePageVo>> searchMovie(@RequestParam(defaultValue = "")String title) {
         return R.data(movieService.searchMovie(title));
+    }
+
+    @GetMapping("/episodes")
+    public R<List<TVB56dyEpisodes>> getEpisodes(@RequestParam int movieId) {
+        return R.data(movieService.getEpisodes(movieId));
     }
 
 }

@@ -52,6 +52,7 @@ public class TVB56dayProcessor implements PageProcessor {
                     String movieId = selfUrl.substring(index + 1).split("=")[1];
                     tvb56dayEpisodes.setMovieId(Long.parseLong(movieId));
                 }
+                tvb56dayEpisodes.setName(page.getHtml().xpath("//title/text()").regex("\\d+$").get());
                 try {
                     ScriptEngine scriptEngine = tvb56dayEpisodes.getScriptEngine();
                     scriptEngine.eval(page.getHtml().xpath("//script/text()/regex('var main.*')").get());

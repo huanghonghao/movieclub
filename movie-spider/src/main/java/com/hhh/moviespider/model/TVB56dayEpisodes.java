@@ -24,7 +24,7 @@ public class TVB56dayEpisodes {
 
     private Long movieId;
 
-    @ExtractBy("//title/text()/regex('\\d+')")
+//    @ExtractBy("//title/text()/regex('\\d+$')")
     private String name;
 
     private String playLink;

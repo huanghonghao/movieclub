@@ -67,7 +67,7 @@ class MoviespiderApplicationTests {
                 .addPipeline(tvb56DyEpisodesPipeline)
                 .setScheduler(new QueueScheduler().setDuplicateRemover(new BloomFilterDuplicateRemover(30000)))
                 .addUrl("http://www.56dy.com/ju/list/----10-")
-                .thread(10).run();
+                .thread(30).run();
     }
 
 }

@@ -23,4 +23,11 @@
     WHERE cover != ""
     ORDER BY update_time DESC
   </select>
+  <select id="getEpisodes" resultType="TVB56dyEpisodes">
+    SELECT a.*
+    FROM tvb_56dy_episodes a
+    LEFT JOIN bd_movie b ON b.movie_id = a.movie_id
+    WHERE a.movie_id = #{movieId}
+    ORDER BY name
+  </select>
 </mapper>
