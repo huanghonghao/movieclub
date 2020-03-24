@@ -1,16 +1,19 @@
 package com.hhh.moviespider.processor;
 
 import com.hhh.moviespider.model.TVB56dayEpisodes;
+import com.hhh.moviespider.utils.UrlUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.PageMapper;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.utils.UrlUtils;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class TVB56dayProcessor implements PageProcessor {
@@ -39,7 +42,8 @@ public class TVB56dayProcessor implements PageProcessor {
             String playPage = page.getHtml().xpath("//div[@class='stui-player']/div[@class='stui-player__video']/iframe/@src").get();
             if(StringUtils.isNotBlank(playPage)) {
                 String url = page.getHtml().xpath("//h1[@class='title']/a/@href").get();
-                page.addTargetRequest(playPage + "?movieId=" + url.substring(url.lastIndexOf("/") +1));
+                String name = page.getHtml().xpath("//h1[@class='title']/a/text()").regex("(?<=第)\\d+(?=集)").get();
+                page.addTargetRequest(playPage + "?movieId=" + url.substring(url.lastIndexOf("/") +1) + "&name=" + name);
             }
         } else {
             TVB56dayEpisodes tvb56dayEpisodes = tvb56dayEpisodesPageMapper.get(page);
@@ -47,17 +51,13 @@ public class TVB56dayProcessor implements PageProcessor {
                 page.setSkip(true);
             } else {
                 String selfUrl = page.getUrl().get();
-                int index = selfUrl.indexOf("?");
-                if(index != -1) {
-                    String movieId = selfUrl.substring(index + 1).split("=")[1];
-                    tvb56dayEpisodes.setMovieId(Long.parseLong(movieId));
-                }
-                tvb56dayEpisodes.setName(page.getHtml().xpath("//title/text()").regex("\\d+$").get());
+                Map<String, String> paramMap = UrlUtil.parse(selfUrl).params;
+                tvb56dayEpisodes.setMovieId(Long.parseLong(paramMap.get("movieId")));
+                tvb56dayEpisodes.setName(paramMap.get("name"));
                 try {
                     ScriptEngine scriptEngine = tvb56dayEpisodes.getScriptEngine();
                     scriptEngine.eval(page.getHtml().xpath("//script/text()/regex('var main.*')").get());
-                    String domain = page.getUrl().regex("https?://.*/").get();
-                    tvb56dayEpisodes.setPlayLink(domain.substring(0, domain.lastIndexOf("/share")) + scriptEngine.get("main"));
+                    tvb56dayEpisodes.setPlayLink(UrlUtils.getHost(page.getUrl().get()) + scriptEngine.get("main"));
                     scriptEngine.eval(page.getHtml().xpath("//script/text()/regex('var videoid.*')").get());
                     tvb56dayEpisodes.setId((String)scriptEngine.get("videoid"));
                 } catch (ScriptException e) {
@@ -71,5 +71,9 @@ public class TVB56dayProcessor implements PageProcessor {
     @Override
     public Site getSite() {
         return site;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UrlUtil.parse("https://tudou.diediao-kuyun.com/20200219/11763_f186f72c/index.m3u8?sign=d8385a7731a42bb3193f202cc20b7113&movieId=3543").params.get("movieId"));
     }
 }
