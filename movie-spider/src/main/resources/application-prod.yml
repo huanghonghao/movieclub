@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://mysql57.rdsmk37ojtw6swl.rds.gz.baidubce.com:3306/spider?useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-    username: rdsroot
-    password: xsw2CDE#
+    url: jdbc:mysql://localhost:3306/spider?useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 2h>rVMiKGtcJ
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
