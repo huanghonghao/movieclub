@@ -1,9 +1,9 @@
 server:
   port: 9088
-#  ssl:
-#    key-store: www.jasonwongmovie.club.jks
-#    key-store-password: 16q1d2zjx4m7
-#    key-store-type: JKS
+  ssl:
+    key-store: www.jasonwongmovie.club.jks
+    key-store-password: 16q1d2zjx4m7
+    key-store-type: JKS
 #    key-alias: tomcat
 
 
